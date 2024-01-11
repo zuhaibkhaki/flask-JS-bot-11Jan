@@ -1,0 +1,74 @@
+{% if bot_name %}
+    <h1>This is the {{ bot_name }} page</h1>
+{% else %}
+    <h1>Welcome to chatbot page!</h1>
+{% endif %}
+
+<h1>What is your question?</h1>
+<form method="post">
+  <label for="query">Enter your query below:</label>
+  <input type="text" id="query" name="query_key" />
+  <br>
+  <input type="submit">
+</form>
+
+<h1>Upload a PDF File</h1>
+<form method="POST" action="{{ url_for('assistant_routes.upload_pdf') }}" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="Upload">
+</form>
+
+<div id="upload_confirm">
+    {% if confirm %}
+        <p> {{confirm}} </p>
+    {% endif %}
+</div>
+
+<div id="summary">
+    {% if summary %}
+        <p> {{ summary }} </p>
+    {% endif %}
+</div>
+
+<div id="chat_interface">
+
+<!-- Input field to capture the user's string -->
+<form action="{{ url_for('assistant_routes.process_query') }}" method="post">
+    <label for="userInput"><h2>Ask questions about your medical report:</h2></label>
+    <input type="text" id="userInput" name="userInput" required>
+    <button onclick="displayString()" type="submit">Submit</button>
+</form>
+
+<!-- Display area to show the entered strings -->
+<div id="displayArea">
+    <!-- Entered strings will be displayed here -->
+    <div id="response">
+
+    </div>
+</div>
+
+
+<script>
+// JavaScript function to display the entered string
+function displayString() {
+    // Get the input value
+    const inputElement = document.getElementById('userInput');
+    const inputValue = inputElement.value;
+
+    // Get the display area element
+    const displayArea = document.getElementById('displayArea');
+
+    // Create a new paragraph element to display the entered string
+    const newParagraph = document.createElement('p');
+    newParagraph.textContent = inputValue;
+    
+    // Append the paragraph element to the display area
+    displayArea.appendChild(newParagraph);
+
+    // Clear the input field after displaying the string
+    inputElement.value = '';
+}
+</script>
+
+</div>
+    

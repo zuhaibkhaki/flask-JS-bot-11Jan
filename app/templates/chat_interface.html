@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Input String Display</title>
+</head>
+<body>
+
+<h2>Enter a String</h2>
+
+<!-- Input field to capture the user's string -->
+<form action="{{ url_for('assistant_routes.process_chat') }}" method="post">
+    <label for="userInput"><h2>Ask questions about your medical report:</h2></label>
+    <input type="text" id="userInput" name="userInput" required>
+    <button onclick="displayString()" type="submit">Submit</button>
+</form>
+
+<!-- Display area to show the entered strings -->
+<div id="displayArea">
+    <!-- Entered strings will be displayed here -->
+</div>
+
+<script>
+// JavaScript function to display the entered string
+function displayString() {
+    // Get the input value
+    const inputElement = document.getElementById('userInput');
+    const inputValue = inputElement.value;
+
+    // Get the display area element
+    const displayArea = document.getElementById('displayArea');
+
+    // Create a new paragraph element to display the entered string
+    const newParagraph = document.createElement('p');
+    newParagraph.textContent = inputValue;
+
+    // Create a new paragraph element to display response
+    const responseParagraph = document.createElement('p');
+    responseParagraph.textContent = response;
+
+    // // Append the paragraph element to the display area
+    displayArea.appendChild(newParagraph);
+    displayArea.appendChild(responseParagraph);
+
+    // Clear the input field after displaying the string
+    inputElement.value = '';
+
+}
+</script>
+
+</body>
+</html>
